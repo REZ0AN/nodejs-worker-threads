@@ -122,7 +122,7 @@ On a 4-core machine, the best performance was achieved with **2 worker threads**
 
 ### Practical Recommendations
 
-* Optimal `thread_count` is typically **(CPU cores − 2)** to leave a core available for the main thread and background processes.
+* Optimal `thread_count` is typically **(CPU cores − 1)** to leave a core available for the main thread and background processes.
 * More threads do not always mean better performance; in fact, they may **degrade performance** due to contention and scheduling overhead.
 * Always **benchmark on your target environment** to determine the optimal configuration for your workload.
 
