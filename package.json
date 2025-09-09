@@ -1,0 +1,19 @@
+{
+  "name": "nodejs-serverless-background-jobs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "autocannon": "^8.0.0",
+    "cli-table3": "^0.6.5",
+    "express": "^5.1.0",
+    "table": "^6.9.0"
+  }
+}
