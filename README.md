@@ -98,7 +98,7 @@ npm i autocannon -g
 > * `-d` → duration of test (seconds)
 > * `--timeout` → request timeout (seconds)
 > * `thread_count` → number of worker threads for CPU-intensive tasks
-> * Choose thread_count wisely, it can results in `Thread Exhaustion`
+> * Choose **thread_count** wisely, it can results in `Thread Exhaustion`
 
 ## Thread Exhaustion
 
