@@ -7,8 +7,7 @@ This project demonstrates how to use Worker Threads in Node.js to handle CPU-int
 
 The catch? If you throw heavy computations at it, like processing huge amounts of data or running complex calculations, even the I/O operations like `dns.lookup()`, `fs.watch()`, `compression (zlib)` can block the event loop. While that’s happening, your app can’t respond to other requests.
 
-Luckily, **Node.js** has a way around this: `Worker Threads` and `clustering` let you **offload** those heavy tasks to other threads, so your app stays responsive and keeps humming along.
-
+Luckily, **Node.js** has a way around this: `Worker Threads` and `clustering` let you **offload** those heavy tasks to separate threads that can execute **in parallel** on multiple CPU cores, so your app stays responsive.
 ## Project Structure
 
 ```
@@ -119,6 +118,24 @@ On a 4-core machine, the best performance was achieved with **2 worker threads**
 
 4. **Benchmarking Environment**
       In this experiment, both the server and the benchmarking tool (`autocannon`) were running on the same machine, sharing CPU resources. This amplifies contention.
+
+## Concurrency vs Parallelism in Worker Threads
+
+**Worker Threads provide parallel execution** of JavaScript code across multiple CPU cores.
+
+However, from the **OS scheduler's perspective**, all threads (including worker threads) 
+are scheduled concurrently. When you have:
+
+- **Fewer threads than CPU cores**: Threads run truly in parallel with minimal contention
+- **More threads than CPU cores**: The OS uses time-slicing (concurrent scheduling), 
+  causing context-switching overhead
+
+This is why on a 4-core system:
+- ✅ **2 workers** = Optimal parallel execution  
+- ❌ **4 workers** = Thread exhaustion due to concurrent scheduling overhead
+
+**Note**: Worker threads *enable* parallelism, but the OS scheduler 
+determines whether they actually run in parallel or are time-sliced concurrently.
 
 ### Practical Recommendations
 
